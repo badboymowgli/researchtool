@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Morpheus Reasearch Tool</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="home">
+        <br>
+    <div class="container" ><!-- Open Container -->
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <a href="/" class="btn btn-danger btn-block">Home</a>
+            </div>
+        </div>
+      </div><!-- Close Container -->
+      <div class="container" ><!-- Open Container -->
+          <div class="row ">
+            <div class="col-md-14 col-sm-14"> <!-- Open A text box Container -->
+                <div class="div-blue text-center">
+                     <form>
+                       <br>
+                         <div class="container text-left padding"> 	    <!-- Open Container -->
+                           <div class="row">									            <!-- Open Row -->
+                             <div class="col-md-12">							        <!--Open span -->
+                                 <div class="card" style="padding: 5px;"><!-- Open Card -->
+                                   <h3 class="card-header" style=" fa-align-left ">{{ subject_title }}</h3>
+                                   <a href="{{ subject_url }}/edit"><i class="fa fa-cog fa-sm" aria-hidden="true" style="color:white;"></i></a>&nbsp;
+                                   <a href="{{ subject_url }}/delete" onclick="return confirm('This Topic and all its Subjects and Notes will be preminately deleted');">
+                                   <i class="fa fa-trash fa-sm" aria-hidden="true" style="color:white;"></i></a>
+                                   {% if subject_pic %}
+                                      <img src="{{ subject_pic }}" class="img-rounded pull-right"><br>
+                                   {% endif %}
+                                   {% if "youtube" not in subject_url_resource %}
+                                      <div class="card-block linebreaks" style="padding: 3px;">{{ subject_description }}<br>
+                                         <br>Link: <a target="_blank" href="{{ subject_url_resource }}" style="color: white">
+                                           <strong>{{ subject_url_resource }}</strong></a></div>
+                                   {% else %}
+                                       {% set slink = subject_url_resource.split('?v=')[1].split('&')[0] %}
+                                       <iframe class="img-rounded center-block" width="700" height="400" src="https://www.youtube.com/embed/{{ slink }}"></iframe><br>
+                                       <div class="card-block linebreaks" style="padding: 3px;">{{ subject_description }}<br>
+                                         <br>Link: <a target="_blank" href="{{ subject_url_resource }}" style="color: white">
+                                           <strong>{{ subject_url_resource }}</strong></a></div>
+                                   {% endif %}
+                                 </div>												          <!-- Close Card -->
+                             </div>												              <!-- Close Span -->
+                           </div>												                <!-- Close Row -->
+                         </div> 													                <!-- Close Container -->
+                       <br>
+                           <div class="container text-left padding"> 	   <!-- Open Container -->
+                             <div class="row">									             <!-- Open Row -->
+                               <div class="col-md-12">							         <!--Open span -->
+                                  <a href="{{ subject_url }}/notes/add" class="btn btn-primary btn-block">Create a New Note</a>
+                                 </div>
+                               </div>												                <!-- Close Row -->
+                           </div> 													                <!-- Close Container -->
+                           <br>
+                  </div>
+                 </form>
+               </div> <!-- Close A text box Container -->
+             </div>
+           </div>
+           {% set nint = 0 %}
+           {% for item in notes %}
+           <div class="container" ><!-- Open Container -->
+               <div class="row ">
+           <div class="col-md-14 col-sm-14"> <!-- Open A text box Container -->
+               <div class="div-deep text-center">
+           <div class="container text-left padding"> 	     <!-- Open Container -->
+           <div class="row">									             <!-- Open Row -->
+             <div class="col-md-12">							         <!--Open span -->
+               <div class="input-group margin-bottom-sm">
+                 <div class="container text-left padding"> 	      <!-- Open Container -->
+                   <div class="row">									            <!-- Open Row -->
+                     <div class="col-md-12">							        <!--Open span -->
+                         <!--<div class="card" style="padding: 5px;"> <!-- Open Card -->
+                             <h3 class="card-header" style=" fa-align-left ">{{ item.note_title }}</h3>
+                             <a href="{{ subject_url }}/notes/{{ nint }}/edit"><i class="fa fa-cog fa-sm" aria-hidden="true" style="color:white;"></i></a>&nbsp;
+                             <a href="{{ subject_url }}/notes/{{ nint }}/delete" onclick="return confirm('This Note will be preminately deleted');">
+                             <i class="fa fa-trash fa-sm" aria-hidden="true" style="color:white;"></i></a>
+                            {% if "youtube" in item.note_linkurl %}
+                              {% set ylink = item.note_linkurl.split('?v=')[1].split('&')[0] %}
+                              <iframe class="img-rounded center-block" width="700" height="400" src="https://www.youtube.com/embed/{{ ylink }}" allowfullscreen></iframe><br>
+                              <div id="demo" class="card-block linebreaks" style="padding: 3px;">{{ item.note_discription }}</div>
+                              <a target="_blank" href="{{ item.note_linkurl }}">{{ item.note_linkname }}</a>
+                            {% elif (".jpg" in item.note_linkurl or ".png" in item.note_linkurl or ".jpeg" in item.note_linkurl) %}
+                              <img src="{{ item.note_linkurl }}" class="img-rounded center-block" style="width:60%;height:60%"><br>
+                              <div class="card-block linebreaks" style="padding: 3px;">{{ item.note_discription }}</div>
+                              <a target="_blank" href="{{ item.note_linkurl }}">{{ item.note_linkname }}</a>
+                            {% else %}
+                              <div class="card-block linebreaks" style="padding: 3px;">{{ item.note_discription }}</div>
+                              <a target="_blank" href="{{ item.note_linkurl }}">{{ item.note_linkname }}</a>
+                            {% endif %}
+                         <!--</div>												          <!-- Close Card -->
+                     </div>												              <!-- Close Span -->
+                   </div>												                <!-- Close Row -->
+                 </div> 													              <!-- Close Container -->
+               <br>
+               </div>
+             </div>
+           </div>
+           </div>												                <!-- Close Row -->
+         </div>
+         </div>
+       </div>
+       </div>
+           {% set nint = nint + 1 %}
+           {% endfor %}										                <!-- Close Row -->
+         </div>
+   </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Reasearch Tool</title>
+    <!--
+    ## STATIC FILES NEEDED BY THE APPLICTION
+    The following are files which goveren the
+    -->
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet" />            <!-- Bootstrap CSS -->
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css.1') }}" rel="stylesheet" />   <!-- Font Awesome CSS -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />                <!-- Customised CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+<body>
+  <div id="home">                                           <!-- Open Home Container - review in style.css -->
+    <br>
+    <!--
+    ## CREATING RESEARCH FILES
+    The following is a container which holds the button linked to a
+    function for creating a new research file
+    -->
+    <div class="container" >                                <!-- Open Bootstrap Container -->
+      <div class="row">                                     <!-- Open Bootstrap Row -->
+        <div class="col-md-12 col-sm-12">                   <!-- Open Row Size -->
+          <a href="/researchfile/add" class="btn btn-danger btn-block">Create a New Research File</a>
+        </div>                                              <!-- Close Row size -->
+      </div>                                                <!-- Close Bootstrap Container -->
+    </div>                                                  <!-- Close Bootstrap Container -->
+  {% set fint= 0 %}
+  {% for file  in files %}
+  <!--
+  ## LISTING OF RESEARCH FILES
+  The following is a container which loads all files found within
+  the 'research' folder of the project
+  -->
+  <div class="container" >                                  <!-- Open RESEARCH FILES Container -->
+  <div class="row ">                                        <!-- Open Bootstrap Row -->
+  <div class="col-md-14 col-sm-14">                         <!-- Open Row Size -->
+    <div class="div-green text-center">                     <!-- Open TEXT BOX Container -->
+      <br>
+        <div class="container text-left padding"> 	        <!-- Open Container -->
+          <div class="row">									                <!-- Open Row -->
+            <div class="col-md-12">							            <!-- Open span -->
+              <div class="card" style="padding: 5px;">      <!-- Open Card -->
+                <h3 class="card-header" style=" fa-align-left">{{ file.research_title }}</h3>
+                <a href="/researchfile/{{ fint }}/edit"><i class="fa fa-cog fa-sm" aria-hidden="true" style="color:white;"></i></a>&nbsp;
+                <a href="/researchfile/{{ fint }}/delete" onclick="return confirm('This research file and all its contents will be preminately deleted');">
+                <i class="fa fa-trash fa-sm" aria-hidden="true" style="color:white;"></i></a>
+                {% if file.research_pic %}
+                  <img src="{{ file.research_pic }}" class="img-rounded pull-right">
+                {% endif %}
+                File Creator: <b>{{ file.researcher }} - ({{ file.researcherID }})</b>
+                <div class="card-block linebreaks" style="padding: 3px;">{{ file.research_discription }}
+                  <br>File Location: <strong>{{ file.file }}</strong>
+                </div>
+              </div>												                <!-- Close Card -->
+            </div>												                  <!-- Close Span -->
+          </div>												                    <!-- Close Row -->
+        </div> 													                    <!-- Close Container -->
+      <br>
+      <!--
+      ## CREATING A NEW TOPIC WITHIN THE RESEARCH FILE
+      The following is a container which holds the button linked to a
+      function for creating a new Topic within the Research file
+      -->
+        <div class="container text-left padding"> 	        <!-- Open NEW TOPIC Button Container -->
+          <div class="row">									                <!-- Open Row -->
+            <div class="col-md-12">							            <!-- Open span -->
+              <a href="/researchfile/{{ fint }}/research/add" class="btn btn-success btn-block">Create a New Topic</a>
+            </div>												                  <!-- Close Row -->
+          </div>												                    <!-- Close Row -->
+        </div> 													                    <!-- Close NEW TOPIC Button Container -->
+      <!--
+      ## LISTING OF TOPICS WITHIN THE FILE
+      The following is a container loads all topics found within the
+      research file in question
+      -->
+      <br>
+        <div class="container text-left padding"> 	        <!-- Open TOPICS Container -->
+          <div class="row">									                <!-- Open Row -->
+            <div class="col-md-12">							            <!-- Open Row Size -->
+              <div class="input-group margin-bottom-sm">    <!-- Open Button Group -->
+              {% set tint = 0 %}
+              {% for item in file.research %}
+                <a href="/researchfile/{{ fint }}/research/{{ tint }}" class="btn btn-success custom">{{ item.topic_title }}</a>
+              {% set tint = tint + 1 %}
+              {% endfor %}
+              </div>                                        <!-- Close  Button Group -->
+            </div>                                          <!-- Close Row Size -->
+          </div>                                            <!-- Close Row -->
+        </div>												                      <!-- Close TOPICS Container -->
+    </div>                                                  <!-- Close TEXT BOX Container -->
+  </div>                                                    <!-- Close Row Size -->
+  {% set fint = fint + 1 %}
+  {% endfor %}
+  </div>                                                      <!-- Close Bootstrap Row -->
+  </div>                                                      <!-- Close RESEARCH FILES Container -->
+  </div>                                                      <!-- Close Home Container - review in style.css -->
+</body>
+</html>

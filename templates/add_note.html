@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+    <title>Create a Note</title>
+  </head>
+  <body>
+    <br>
+    <form action = "{{ note_url }}" method = "post">
+      <div class="container text-left padding"> 	    <!-- Open Container -->
+        <div class="row">									            <!-- Open Row -->
+          <div class="col-md-12">							        <!--Open span -->
+              <div class="card" style="padding: 0px;"><!-- Open Card -->
+                  <h5 class="card-header" style="fa-align-left">Add a Note</h5>
+                  <div class="card-block" style="padding: 5px;">
+                    <!-- -->
+                    <div class="form-row" style="padding: 5px;">
+                      <div class="col">
+                        {% if note_title %}
+                          <input type="text" class="form-control" name ="note_title" value="{{ note_title }}">
+                        {% else %}
+                          <input type="text" class="form-control" name ="note_title" placeholder="Note Title" value="">
+                        {% endif %}
+                      </div>
+                    </div>
+                  <div class="form-row" style="padding: 5px;">
+                    <div class="col">
+                      {% if note_linkurl %}
+                        <input type="text" class="form-control" name ="note_linkurl" value="{{ note_linkurl }}">
+                      {% else %}
+                        <input type="text" class="form-control" name ="note_linkurl" placeholder="Note URL Link" value="">
+                      {% endif %}
+                    </div>
+                    <div class="col">
+                      {% if note_linkname %}
+                        <input type="text" class="form-control" name ="note_linkname" value="{{ note_linkname }}">
+                      {% else %}
+                        <input type="text" class="form-control" name ="note_linkname" placeholder="Note URL Link Name" value="">
+                      {% endif %}
+                    </div>
+                  </div>
+                  </div>
+                    <div class="form-row" style="padding: 5px;">
+                      <div class="col">
+                        {% if note_discription %}
+                          <textarea type="text" class="form-control" name="note_discription" style="height: 190px;">{{ note_discription }}</textarea>
+                        {% else %}
+                          <textarea type="text" class="form-control" name="note_discription" placeholder="Note Discription" style="height: 190px;"></textarea>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <!-- -->
+                  </div>
+              </div>												          <!-- Close Card -->
+          </div>												              <!-- Close Span -->
+        </div>												                <!-- Close Row -->
+      </div> 													                <!-- Close Container -->
+    <br>
+      <div class="container text-left padding"> 	   <!-- Open Container -->
+  		<div class="row">									             <!-- Open Row -->
+        <div class="col-md-12">							         <!--Open span -->
+          <div class="input-group margin-bottom-sm">
+            <button class="tablinks btn btn-success" type="submit"><i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>&nbsp;
+            </form>
+          </div>
+  			</div>&nbsp;
+  	  </div>												                <!-- Close Span -->
+	    </div>												                <!-- Close Row -->
+    </div> 													                <!-- Close Container -->
+    <br>
+    <br>
+  </body>
+</html>

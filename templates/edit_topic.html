@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+    <title>Create a Research Topic</title>
+  </head>
+  <body>
+    <br>
+    <form action = "{{ topic_url }}/edit" method = "post">
+      <div class="container text-left padding"> 	    <!-- Open Container -->
+        <div class="row">									            <!-- Open Row -->
+          <div class="col-md-12">							        <!--Open span -->
+              <div class="card" style="padding: 0px;"><!-- Open Card -->
+                  <h5 class="card-header" style="fa-align-left">Edit a Topic</h5>
+                  <div class="card-block" style="padding: 5px;">
+                    <!-- -->
+                    <div class="form-row" style="padding: 5px;">
+                      <div class="col">
+                        {% if topic_title %}
+                          <input type="text" class="form-control" name ="topic_title" value="{{ topic_title }}">
+                        {% else %}
+                          <input type="text" class="form-control" name ="topic_title" placeholder="Topic Title" value="">
+                        {% endif %}
+                      </div>
+                      <div class="col">
+                        {% if topic_pic %}
+                          <input type="text" class="form-control" name ="topic_pic" value="{{ topic_pic }}">
+                        {% else %}
+                          <input type="text" class="form-control"  name ="topic_pic" placeholder="Topic Picture" value="">
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="form-row" style="padding: 5px;">
+                      <div class="col">
+                        {% if topic_url_resource %}
+                          <input type="text" class="form-control" name ="topic_url_resource" value="{{ topic_url_resource }}">
+                        {% else %}
+                          <input type="text" class="form-control" name ="topic_url_resource" placeholder="Topic URL Resource" value="">
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="form-row" style="padding: 5px;">
+                      <div class="col">
+                        {% if topic_description %}
+                          <textarea type="text" class="form-control" name="topic_description" style="height: 190px;">{{ topic_description }}</textarea>
+                        {% else %}
+                          <textarea type="text" class="form-control" name="topic_description" placeholder="Topic Discription" style="height: 190px;"></textarea>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <!-- -->
+                  </div>
+              </div>												          <!-- Close Card -->
+          </div>												              <!-- Close Span -->
+        </div>												                <!-- Close Row -->
+      </div> 													                <!-- Close Container -->
+    <br>
+      <div class="container text-left padding"> 	   <!-- Open Container -->
+  		<div class="row">									             <!-- Open Row -->
+        <div class="col-md-12">							         <!--Open span -->
+          <div class="input-group margin-bottom-sm">
+            <button class="tablinks btn btn-success" type="submit"><i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;Save</button>&nbsp;
+            </form>
+          </div>
+  			</div>&nbsp;
+  	  </div>												                <!-- Close Span -->
+	    </div>												                <!-- Close Row -->
+    </div> 													                <!-- Close Container -->
+    <br>
+    <br>
+  </body>
+</html>

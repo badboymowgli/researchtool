@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Reasearch Tool</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="home" data-role="page">
+    <br>
+    <div class="container" ><!-- Open Container -->
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <a href="/" class="btn btn-danger btn-block">Home</a>
+            </div>
+        </div>
+      </div><!-- Close Container -->
+      <div class="container" ><!-- Open Container -->
+          <div class="row ">
+            <div class="col-md-14 col-sm-14"> <!-- Open A text box Container -->
+                <div class="div-lightbue text-center">
+                     <form>
+                       <br>
+                         <div class="container text-left padding"> 	    <!-- Open Container -->
+                           <div class="row">									            <!-- Open Row -->
+                             <div class="col-md-12">							        <!--Open span -->
+                                 <div class="card" style="padding: 5px;"><!-- Open Card -->
+                                     <h3 class="card-header" style=" fa-align-left ">{{ topic_title }}</h3>
+                                     <a href="{{ topic_url }}/edit"><i class="fa fa-cog fa-sm" aria-hidden="true" style="color:white;"></i></a>&nbsp;
+                                     <a href="{{ topic_url }}/delete" onclick="return confirm('This Topic and all its Subjects and Notes will be preminately deleted');">
+                                     <i class="fa fa-trash fa-sm" aria-hidden="true" style="color:white;"></i></a>
+                                     {% if subject_pic %}
+                                        <img src="{{ topic_pic }}" class="img-rounded pull-right"><br>
+                                     {% endif %}
+                                     <div class="card-block linebreaks" style="padding: 3px;">{{ topic_description }}<br>
+                                     Link: <a target="_blank" href="{{ topic_url_resource }}" style="color: white"><strong>{{ topic_url_resource }}</strong></a></div>
+                                 </div>												          <!-- Close Card -->
+                             </div>												              <!-- Close Span -->
+                           </div>												                <!-- Close Row -->
+                         </div> 													                <!-- Close Container -->
+                       <br>
+                           <div class="container text-left padding"> 	   <!-- Open Container -->
+                             <div class="row">									             <!-- Open Row -->
+                               <div class="col-md-12">							         <!--Open span -->
+                                  <a href="{{ topic_url }}/add" class="btn btn-info btn-block">Create a New Subject</a>
+                                 </div>
+                               </div>												                <!-- Close Row -->
+                           </div> 													                <!-- Close Container -->
+                           <br>
+                         <div class="container text-left padding"> 	   <!-- Open Container -->
+                         <div class="row">									             <!-- Open Row -->
+                           <div class="col-md-12">							         <!--Open span -->
+                             <div class="input-group margin-bottom-sm">
+                                {% set sint = 0 %}
+                                {% for item in subjects %}
+                               <a href="{{ topic_url }}/subjects/{{ sint }}" class="btn btn-info custom">{{ item.subject_title }}</a>
+                                {% set sint = sint + 1 %}
+                                {% endfor %}
+                               </form>
+                             </div>
+                           </div>
+                         </div>
+                         </div>												                <!-- Close Row -->
+                  </div>
+                 </form>
+               </div> <!-- Close A text box Container -->
+   </body>
+</html>
